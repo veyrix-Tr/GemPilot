@@ -18,7 +18,6 @@ args = parser.parse_args()
 def main():
 
     messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
-
     for _ in range(20):
         response = client.models.generate_content(
             model="gemini-2.5-flash",
@@ -47,13 +46,14 @@ def main():
                 if not function_call_result.parts:
                     raise Exception("Function call result has no parts")
 
-                function_call_response = function_call_result.parts.function_response
+                function_call_response = function_call_result.parts[0].function_response
                 if not function_call_response:
                     raise Exception("Function call response is empty")
                 if not function_call_response.response:
                     raise Exception("Function call response has no response")
 
-                function_results.append(function_call_result.parts)
+                # function_results list contains function_call_result.parts (which is a list), but types.Content expects parts to be a list of Part objects, not a list of lists
+                function_results.extend(function_call_result.parts)
                 if args.verbose:
                     print(f"-> {function_call_result.parts.function_response.response}")
             
