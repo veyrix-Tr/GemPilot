@@ -41,8 +41,8 @@ GemPilot leverages Google's Gemini 2.5 Flash model to understand natural languag
 
 2. Create and activate virtual environment:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   uv venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
 3. Install dependencies:
@@ -209,7 +209,7 @@ uv run calculator/tests.py
 1. **API Key Errors**: Ensure `GEMINI_API_KEY` is set correctly in `.env`
 2. **Quota Exceeded**: Wait for API quota reset or upgrade to paid plan
 3. **Path Errors**: Verify files exist within the working directory
-4. **Import Errors**: Ensure all dependencies are installed with `uv sync`
+4. **Import Errors**: Ensure all dependencies are installed correctly
 
 ### Debug Mode
 
